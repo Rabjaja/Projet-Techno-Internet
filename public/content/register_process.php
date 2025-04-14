@@ -32,7 +32,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Connexion à la base de données
-require_once 'config/config.php'; // Connexion à la DB
+require_once '../../admin/src/php/db/config.php'; // Connexion à la DB
 
 // Vérification si l'email ou le nom d'utilisateur existe déjà
 $query = $pdo->prepare('SELECT * FROM users WHERE email = :email OR username = :username');
@@ -42,6 +42,7 @@ $user = $query->fetch(PDO::FETCH_ASSOC);
 if ($user) {
     $_SESSION['error'] = 'Ce nom d\'utilisateur ou cette adresse e-mail est déjà utilisé.';
     header('Location: register.php');
+    var_dump($user);
     exit;
 }
 

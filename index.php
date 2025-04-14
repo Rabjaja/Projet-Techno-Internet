@@ -6,8 +6,12 @@ $pageToLoad = 'public/content/home.php'; // Page d'accueil publique
 
 // Si l'utilisateur est connecté et a un rôle d'admin, on change la page
 if (isset($_SESSION['user'])) {
-    if ($_SESSION['user']['role'] == 'admin') {
-        $pageToLoad = './content/admin/dashboard.php'; // Page d'accueil admin
+    if ($_SESSION['user']['username'] == 'admin') {
+        header("Location: admin/content/dashboard.php");
+    }
+    else{
+        header("Location: public/content/loged.php");
+        exit();
     }
 }
 ?>
