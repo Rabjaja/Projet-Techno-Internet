@@ -1,10 +1,8 @@
 <?php
-// Démarrer la session
 session_start();
 
-// Récupérer les données de l'utilisateur (exemple)
-$username = $_SESSION['user']['username'];  // Assurez-vous que ces données ont été stockées lors de la connexion
-$email = $_SESSION['user']['email']; // L'email de l'utilisateur
+$username = $_SESSION['user']['username'];
+$email = $_SESSION['user']['email'];
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +24,5 @@ $email = $_SESSION['user']['email']; // L'email de l'utilisateur
 
     <a href="logout.php" class="btn btn-danger">Se déconnecter</a>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

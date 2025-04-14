@@ -1,23 +1,23 @@
-<header class="header bg-dark text-light py-3">
+<header class="header bg-dark text-white py-3">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <!-- Logo -->
-            <a href="#" class="text-light h4">MonSite</a>
+            <a href="#" class="text-white h4">MonSite</a>
 
             <!-- Menu de navigation -->
             <nav>
                 <ul class="nav">
                     <li class="nav-item">
-                        <a href="index.php" class="nav-link text-light">Accueil</a>
+                        <a href="index.php" class="nav-link text-white">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a href="about.php" class="nav-link text-light">À propos</a>
+                        <a href="about.php" class="nav-link text-white">À propos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="contact.php" class="nav-link text-light">Contact</a>
+                        <a href="contact.php" class="nav-link text-white">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a href="public/content/login.php" class="nav-link text-light">Connexion</a>
+                        <a href="public/content/login.php" class="nav-link text-white">Connexion</a>
                     </li>
                 </ul>
             </nav>
