@@ -2,7 +2,7 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <!-- Logo -->
-            <a href="#" class="text-white h4">MonSite</a>
+            <a href="#" class="text-white h4">Vinyland Saga</a>
 
             <!-- Menu de navigation -->
             <nav>
