@@ -16,7 +16,7 @@ class AuthService
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
         $stmt->execute([$username, $email]);
         if ($stmt->fetch()) {
-            return false; // déjà existant
+            return false;
         }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);

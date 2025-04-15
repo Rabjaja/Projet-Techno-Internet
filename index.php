@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$pageToLoad = 'public/content/home.php';
+$pageToLoad = 'public/src/php/utils/home.php';
 
 if (isset($_SESSION['user'])) {
     if ($_SESSION['user']['username'] == 'admin') {
