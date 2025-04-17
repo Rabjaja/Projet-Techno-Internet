@@ -1,5 +1,4 @@
 <?php
-global $pdo;
 session_start();
 ?>
 

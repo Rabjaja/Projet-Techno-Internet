@@ -1,0 +1,23 @@
+#panier-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    z-index: 100;
+    width: 260px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+}
+
+.card-text {
+    height: 40px;
+
+}
+
