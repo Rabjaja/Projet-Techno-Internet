@@ -22,7 +22,8 @@ foreach ($vinyles as $vinyle): ?>
                 </div>
                 <div>
                     <p><strong><?= htmlspecialchars($vinyle['prix']) ?> &#x20AC</strong></p>
-                    <button class="btn btn-primary btn-block" onclick="ajouterAuPanier('<?= addslashes($vinyle['titre']) ?>')">Ajouter au panier</button>
+                    <p><?= htmlspecialchars($vinyle['quantite']) ?> en stock</p>
+                    <button class="btn btn-primary btn-block" onclick="ajouterAuPanier('<?= $vinyle['titre'] ?>')">Ajouter au panier</button>
                 </div>
             </div>
         </div>

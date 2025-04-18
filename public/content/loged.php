@@ -16,7 +16,7 @@ $categories = $categorieDAO->getAllCategories();
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Boutique de Vinyles</title>
+    <title>La Boutique</title>
     <link rel="stylesheet" href="../assets/css/loged.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
 </head>
@@ -34,18 +34,15 @@ $categories = $categorieDAO->getAllCategories();
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h4>Bienvenue, <?= htmlspecialchars($username) ?> !</h4>
-            <small><?= htmlspecialchars($email) ?></small>
+            <form method="post" action="logout.php">
+                <button type="submit" class="btn btn-danger">Déconnexion</button>
+            </form>
         </div>
-        <form method="post" action="logout.php">
-            <button type="submit" class="btn btn-danger">Déconnexion</button>
-        </form>
+
     </div>
 
     <!-- Barre de recherche et filtres -->
     <div class="row mb-4">
-        <div class="col-md-6 mb-2">
-            <input type="text" id="searchInput" class="form-control" placeholder="🔍 Rechercher un vinyle...">
-        </div>
         <div class="col-md-4 mb-2">
             <select id="categorieSelect" class="form-control">
                 <option value="">Toutes les catégories</option>
@@ -65,6 +62,7 @@ $categories = $categorieDAO->getAllCategories();
                         <h5 class="card-title"><?= htmlspecialchars($vinyle['titre']) ?></h5>
                         <p class="card-text"><?= htmlspecialchars($vinyle['description']) ?></p>
                         <p><strong><?= htmlspecialchars($vinyle['prix']) ?> &#x20AC</strong></p>
+                        <p><?= htmlspecialchars($vinyle['quantite']) ?> en stock</p>
                         <button class="btn btn-primary" onclick="ajouterAuPanier('<?= addslashes($vinyle['titre']) ?>')">Ajouter au panier</button>
                     </div>
                 </div>
