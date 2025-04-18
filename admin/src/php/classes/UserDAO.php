@@ -23,5 +23,4 @@ class UserDAO
         $stmt = $this->pdo->prepare("DELETE FROM users WHERE id = ?");
         return $stmt->execute([$id]);
     }
-
 }

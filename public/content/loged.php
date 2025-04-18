@@ -2,14 +2,19 @@
 session_start();
 require_once '../../admin/src/php/classes/VinyleDAO.php';
 require_once '../../admin/src/php/classes/CategorieDAO.php';
+require_once '../../admin/src/php/classes/CommandeDAO.php';  // Ajoutez cette ligne pour inclure CommandeDAO
 
 $username = $_SESSION['user']['username'];
 $email = $_SESSION['user']['email'];
+$id = $_SESSION['user']['id'];
 
 $vinyleDAO = new VinyleDAO();
 $categorieDAO = new CategorieDAO();
+$commandeDAO = new CommandeDAO();  // Instancie CommandeDAO
+
 $vinyles = $vinyleDAO->getAllVinyles();
 $categories = $categorieDAO->getAllCategories();
+$commandes = $commandeDAO->getCommandesByUserId($id);  // Récupère les commandes de l'utilisateur
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +32,7 @@ $categories = $categorieDAO->getAllCategories();
     <ul id="panier" class="list-unstyled mb-2">
         <li>Aucun vinyle ajouté.</li>
     </ul>
-    <button class="btn btn-success btn-sm btn-block" onclick="afficherCommande()">Passer la commande</button>
+    <button class="btn btn-success btn-sm btn-block" onclick="passerCommande(<?php echo $id ?>)">Passer la commande</button>
 </div>
 
 <div class="container py-4">
@@ -38,8 +43,35 @@ $categories = $categorieDAO->getAllCategories();
                 <button type="submit" class="btn btn-danger">Déconnexion</button>
             </form>
         </div>
-
     </div>
+
+    <!-- Afficher les commandes de l'utilisateur -->
+    <h4 class="text-center mb-4">Vos Commandes</h4>
+    <div class="row">
+        <?php if (empty($commandes)): ?>
+            <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                    Aucune commande passée.
+                </div>
+            </div>
+        <?php else: ?>
+            <?php foreach ($commandes as $commande): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-secondary text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Commande ID: <?= htmlspecialchars($commande['commande_id']) ?></h5>
+                            <p class="card-text">Date de la commande : <?= date('d F Y à H:i', strtotime($commande['created_at'])) ?></p>
+
+                            <!-- Lien vers la page de détails de la commande -->
+                            <a href="commande_details.php?commande_id=<?= htmlspecialchars($commande['commande_id']) ?>" class="btn btn-info btn-sm" target="_blank">Voir les détails</a>
+
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+
 
     <!-- Barre de recherche et filtres -->
     <div class="row mb-4">
@@ -63,7 +95,7 @@ $categories = $categorieDAO->getAllCategories();
                         <p class="card-text"><?= htmlspecialchars($vinyle['description']) ?></p>
                         <p><strong><?= htmlspecialchars($vinyle['prix']) ?> &#x20AC</strong></p>
                         <p><?= htmlspecialchars($vinyle['quantite']) ?> en stock</p>
-                        <button class="btn btn-primary" onclick="ajouterAuPanier('<?= addslashes($vinyle['titre']) ?>')">Ajouter au panier</button>
+                        <button class="btn btn-primary" onclick="ajouterAuPanier(<?= $vinyle['id'] ?>)">Ajouter au panier</button>
                     </div>
                 </div>
             </div>
@@ -73,6 +105,7 @@ $categories = $categorieDAO->getAllCategories();
 
 <script src="../src/js/panier.js"></script>
 <script src="../src/js/filtrer_vinyles.js"></script>
+<script src="../src/js/passer_commande.js"></script>
 
 </body>
 </html>
