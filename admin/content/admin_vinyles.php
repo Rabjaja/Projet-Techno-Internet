@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../src/php/classes/VinyleDAO.php';
-require_once '../src/php/classes/CategorieDao.php';
+require_once '../src/php/classes/CategorieDAO.php';
 
 $vinyleDAO = new VinyleDAO();
 $categorieDAO = new CategorieDao();
@@ -11,12 +11,13 @@ $categories = $categorieDAO->getAllCategories();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add'])) {
         $titre = $_POST['titre'];
+        $description = $_POST['description'];
         $prix = $_POST['prix'];
         $quantite = $_POST['quantite'];
         $image = $_POST['image'];
         $categorieId = $_POST['categorie'];
         
-        $vinyleDAO->addVinyle($titre, $prix, $quantite, $image, $categorieId);
+        $vinyleDAO->addVinyle($titre, $description, $prix, $quantite, $image, $categorieId);
     }
 
     if (isset($_POST['delete'])) {
@@ -49,6 +50,10 @@ $vinyles = $vinyleDAO->getAllVinyles();
                 <input type="text" class="form-control" name="titre" required>
             </div>
             <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea class="form-control" name="description" required></textarea>
+            </div>
+            <div class="mb-3">
                 <label for="prix" class="form-label">Prix:</label>
                 <input type="number" class="form-control" name="prix" required step="0.01">
             </div>
@@ -57,23 +62,22 @@ $vinyles = $vinyleDAO->getAllVinyles();
                 <input type="number" class="form-control" name="quantite" required>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Url:</label>
-                <input type="text" class="form-control" name="image" placeholder="Collez l'URL de l'image ou le nom du fichier" required>
+                <label for="image" class="form-label">URL:</label>
+                <input type="text" class="form-control" name="image" required>
             </div>
-
             <div class="mb-3">
                 <label for="categorie" class="form-label">Categorie:</label>
                 <select name="categorie" class="form-control" required>
-                    <option value="">Toutes les categories</option>
+                    <option value="">Selectionner une categorie</option>
                     <?php foreach ($categories as $categorie): ?>
-                        <option value="<?php echo $categorie['id']; ?>"><?php echo $categorie['nom']; ?></option>
+                        <option value="<?php echo $categorie['id']; ?>">
+                            <?php echo htmlspecialchars($categorie['nom']); ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
-    
             <button type="submit" name="add" class="btn btn-primary">Ajouter</button>
         </form>
-
 
 
         <h2 class="mt-5">Liste des Vinyles</h2>
@@ -84,6 +88,7 @@ $vinyles = $vinyleDAO->getAllVinyles();
                     <th>Titre</th>
                     <th>Prix</th>
                     <th>Quantite</th>
+                    <th>Categorie</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -94,6 +99,18 @@ $vinyles = $vinyleDAO->getAllVinyles();
                         <td><?php echo $vinyle['titre']; ?></td>
                         <td><?php echo $vinyle['prix']; ?> 	&#8364;</td>
                         <td><?php echo $vinyle['quantite']; ?></td>
+                        <td>
+                        <?php
+                            $categorie_nom = '';
+                            foreach ($categories as $categorie) {
+                                if ($vinyle['categorie_id'] == $categorie['id']) {
+                                    $categorie_nom = $categorie['nom'];
+                                    break;
+                                }
+                            }
+                            echo htmlspecialchars($categorie_nom);
+                            ?>
+                        </td>
                         <td>
                             <form method="POST">
                                 <input type="hidden" name="id" value="<?php echo $vinyle['id']; ?>">

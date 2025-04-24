@@ -47,16 +47,16 @@ class VinyleDAO
         return $result ? $result['quantite'] : 0;
     }
 
-    public function addVinyle(string $titre, float $prix, int $quantite, string $image, int $categorieId): bool
+    public function addVinyle(string $titre, string $description, float $prix, int $quantite, string $image, int $categorie_id): bool
     {
-        $stmt = $this->pdo->prepare("INSERT INTO vinyles (titre, prix, quantite, image_url, categorie_id) VALUES (?, ?, ?, ?, ?)");
-        return $stmt->execute([$titre, $prix, $quantite, $image, $categorieId]);
+        $stmt = $this->pdo->prepare("INSERT INTO vinyles (titre, description, prix, quantite, image_url, categorie_id) VALUES (?, ?, ?, ?, ?, ?)");
+        return $stmt->execute([$titre, $description, $prix, $quantite, $image, $categorie_id]);
     }
 
-    public function updateVinyle(int $id, string $titre, float $prix, int $quantite, string $image, int $categorie_id): bool
+    public function updateVinyle(int $id, string $titre, string $description, float $prix, int $quantite, string $image, int $categorie_id): bool
     {
-        $stmt = $this->pdo->prepare("UPDATE vinyles SET titre = ?, prix = ?, quantite = ?, image_url = ?, categorie_id = ? WHERE id = ?");
-        return $stmt->execute([$titre, $prix, $quantite, $image, $categorie_id, $id]);
+        $stmt = $this->pdo->prepare("UPDATE vinyles SET titre = ?, description = ?, prix = ?, quantite = ?, image_url = ?, categorie_id = ? WHERE id = ?");
+        return $stmt->execute([$titre, $description, $prix, $quantite, $image, $categorie_id, $id]);
     }
 
     public function deleteVinyle(int $id): bool
