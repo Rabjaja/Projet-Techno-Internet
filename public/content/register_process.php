@@ -17,10 +17,8 @@ $auth = new AuthService();
 $success = $auth->register($username, $email, $password);
 
 if ($success) {
-    $_SESSION['success'] = "Inscription réussie. Connectez-vous.";
     header("Location: login.php");
 } else {
-    $_SESSION['error'] = "Nom d'utilisateur ou email déjà utilisé.";
     header("Location: register.php");
 }
 exit;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Boutique de Vinyles</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.6.2/dist/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="public/assets/css/home.css">
 </head>
 <body class="bg-dark text-white">
 
@@ -42,7 +43,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Rock</h5>
                     <p class="card-text">Retrouvez les plus grands classiques du rock sur vinyle. De Led Zeppelin à Pink Floyd en passant par Queen, cette catégorie vous plonge dans l'âge d'or du rock. </p>
-                    <a href="category.php?genre=rock" class="btn btn-primary">Explorer la catégorie</a>
+                    <a href="" class="btn btn-primary">Explorer la catégorie</a>
                 </div>
             </div>
         </div>
@@ -53,7 +54,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Rap</h5>
                     <p class="card-text">Découvrez les meilleurs albums de rap. Des classiques de Tupac et Biggie aux dernières sorties, cette catégorie met en avant la scène rap mondiale.</p>
-                    <a href="category.php?genre=rap" class="btn btn-primary">Explorer la catégorie</a>
+                    <a href="" class="btn btn-primary">Explorer la catégorie</a>
                 </div>
             </div>
         </div>
@@ -64,7 +65,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Musique Électronique</h5>
                     <p class="card-text">Pour les amateurs de beats, de basses et de sonorités futuristes, découvrez notre collection de vinyles de musique électronique.</p>
-                    <a href="category.php?genre=electro" class="btn btn-primary">Explorer la catégorie</a>
+                    <a href="" class="btn btn-primary">Explorer la catégorie</a>
                 </div>
             </div>
         </div>

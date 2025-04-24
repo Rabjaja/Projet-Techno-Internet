@@ -2,7 +2,7 @@
 session_start();
 require_once '../../admin/src/php/classes/VinyleDAO.php';
 require_once '../../admin/src/php/classes/CategorieDAO.php';
-require_once '../../admin/src/php/classes/CommandeDAO.php';  // Ajoutez cette ligne pour inclure CommandeDAO
+require_once '../../admin/src/php/classes/CommandeDAO.php';
 
 $username = $_SESSION['user']['username'];
 $email = $_SESSION['user']['email'];
@@ -10,11 +10,11 @@ $id = $_SESSION['user']['id'];
 
 $vinyleDAO = new VinyleDAO();
 $categorieDAO = new CategorieDAO();
-$commandeDAO = new CommandeDAO();  // Instancie CommandeDAO
+$commandeDAO = new CommandeDAO();
 
 $vinyles = $vinyleDAO->getAllVinyles();
 $categories = $categorieDAO->getAllCategories();
-$commandes = $commandeDAO->getCommandesByUserId($id);  // Récupère les commandes de l'utilisateur
+$commandes = $commandeDAO->getCommandesByUserId($id);
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +45,6 @@ $commandes = $commandeDAO->getCommandesByUserId($id);  // Récupère les command
         </div>
     </div>
 
-    <!-- Afficher les commandes de l'utilisateur -->
     <h4 class="text-center mb-4">Vos Commandes</h4>
     <div class="row">
         <?php if (empty($commandes)): ?>
@@ -61,10 +60,7 @@ $commandes = $commandeDAO->getCommandesByUserId($id);  // Récupère les command
                         <div class="card-body">
                             <h5 class="card-title">Commande ID: <?= htmlspecialchars($commande['commande_id']) ?></h5>
                             <p class="card-text">Date de la commande : <?= date('d F Y à H:i', strtotime($commande['created_at'])) ?></p>
-
-                            <!-- Lien vers la page de détails de la commande -->
                             <a href="commande_details.php?commande_id=<?= htmlspecialchars($commande['commande_id']) ?>" class="btn btn-info btn-sm" target="_blank">Voir les détails</a>
-
                         </div>
                     </div>
                 </div>
@@ -72,8 +68,6 @@ $commandes = $commandeDAO->getCommandesByUserId($id);  // Récupère les command
         <?php endif; ?>
     </div>
 
-
-    <!-- Barre de recherche et filtres -->
     <div class="row mb-4">
         <div class="col-md-4 mb-2">
             <select id="categorieSelect" class="form-control">

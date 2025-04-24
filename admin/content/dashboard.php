@@ -1,5 +1,10 @@
 <?php
+
 session_start();
+require_once '../../admin/src/php/classes/UserDAO.php';
+$userDAO = new UserDAO();
+$users = $userDAO->getAllUsers();
+
 ?>
 
 <!DOCTYPE html>
@@ -12,12 +17,14 @@ session_start();
 </head>
 <body>
 <div class="container">
-    <h1 class="mt-5">Page Admin</h1>
-    <div class="alert alert-info mt-3">
-        <p>Connecté en tant qu'administrateur.</p>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h1>Page Admin</h1>
+        <div>
+            <a href="admin_vinyles.php" class="btn btn-primary">Gestion des Vinyles</a>
+        </div>
     </div>
 
-    <h3>Gestion des utilisateurs</h3>
+    <h3 class="mt-5">Gestion des utilisateurs</h3>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -29,12 +36,6 @@ session_start();
         </tr>
         </thead>
         <tbody>
-        <?php
-        require_once '../../admin/src/php/classes/UserDAO.php';
-
-        $userDAO = new UserDAO();
-        $users = $userDAO->getAllUsers();
-        ?>
 
         <?php foreach ($users as $user): ?>
         <tr>
@@ -53,5 +54,9 @@ session_start();
 
     <a href="../../public/content/logout.php" class="btn btn-danger">Se déconnecter</a>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

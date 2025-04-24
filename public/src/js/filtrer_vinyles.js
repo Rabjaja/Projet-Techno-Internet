@@ -1,18 +1,17 @@
+//JQUERY et AJAX//
 
-document.getElementById('categorieSelect').addEventListener('change', function () {
-    const categorieId = this.value;
+$('#categorieSelect').on('change', function () {
+    const categorieId = $(this).val();
 
-    fetch('../src/php/utils/filtrer_vinyles.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'categorie_id=' + encodeURIComponent(categorieId)
-    })
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('vinyles-container').innerHTML = html;
-        })
-        .catch(error => {
-            console.error('Erreur lors du chargement des vinyles:', error);
-        });
+    $.ajax({
+        url: '../src/php/utils/filtrer_vinyles.php',
+        type: 'POST',
+        data: { categorie_id: categorieId },
+        success: function (html) {
+            $('#vinyles-container').html(html);
+        },
+        error: function (xhr, status, error) {
+            console.error('Erreur lors du chargement des vinyles :', error);
+        }
+    });
 });
-

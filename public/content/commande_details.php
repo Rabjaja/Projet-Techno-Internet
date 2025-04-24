@@ -14,7 +14,6 @@ if (isset($_GET['commande_id'])) {
     exit();
 }
 
-// Calcul du total
 $totalCommande = 0;
 foreach ($commande['vinyles'] as $vinyle) {
     $totalCommande += $vinyle['prix'] * $vinyle['quantite'];
@@ -35,7 +34,7 @@ foreach ($commande['vinyles'] as $vinyle) {
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h4>Détails de la commande #<?= htmlspecialchars($commande['id']) ?></h4>
-            <a href="index.php" class="btn btn-secondary">Retour à l'accueil</a>
+            <a href="../src/php/utils/commande_pdf.php?commande_id=<?= $commande['id'] ?>" class="btn btn-info" target="_blank">Télécharger PDF</a>
         </div>
     </div>
 
@@ -71,3 +70,6 @@ foreach ($commande['vinyles'] as $vinyle) {
                 </tr>
                 </tfoot>
             </table>
+        </div>
+    </div>
+</div>

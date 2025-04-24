@@ -29,7 +29,6 @@
         </div>
     </div>
 
-    <!-- Copyright -->
     <div class="container text-center mt-3">
         <span class="text-white">© 2025 Vinyland Saga. Tous droits réservés.</span>
     </div>
