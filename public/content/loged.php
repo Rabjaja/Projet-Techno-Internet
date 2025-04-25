@@ -38,7 +38,7 @@ $commandes = $commandeDAO->getCommandesByUserId($id);
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4>Bienvenue, <?= htmlspecialchars($username) ?> !</h4>
+            <h4>Bienvenue, <?= $username ?> !</h4>
             <form method="post" action="logout.php">
                 <button type="submit" class="btn btn-danger">Déconnexion</button>
             </form>
@@ -58,9 +58,9 @@ $commandes = $commandeDAO->getCommandesByUserId($id);
                 <div class="col-md-4 mb-4">
                     <div class="card bg-secondary text-white">
                         <div class="card-body">
-                            <h5 class="card-title">Commande ID: <?= htmlspecialchars($commande['commande_id']) ?></h5>
+                            <h5 class="card-title">Commande ID: <?= $commande['commande_id'] ?></h5>
                             <p class="card-text">Date de la commande : <?= date('d F Y à H:i', strtotime($commande['created_at'])) ?></p>
-                            <a href="commande_details.php?commande_id=<?= htmlspecialchars($commande['commande_id']) ?>" class="btn btn-info btn-sm" target="_blank">Voir les détails</a>
+                            <a href="commande_details.php?commande_id=<?= $commande['commande_id'] ?>" class="btn btn-info btn-sm" target="_blank">Voir les détails</a>
                         </div>
                     </div>
                 </div>
@@ -81,14 +81,14 @@ $commandes = $commandeDAO->getCommandesByUserId($id);
 
     <div class="row" id="vinyles-container">
         <?php foreach ($vinyles as $vinyle): ?>
-            <div class="col-md-4 mb-4 vinyle-card" data-categorie="<?= htmlspecialchars($vinyle['categorie_id']) ?>">
+            <div class="col-md-4 mb-4 vinyle-card" data-categorie="<?= ($vinyle['categorie_id']) ?>">
                 <div class="card bg-secondary text-white">
-                    <img src="<?= htmlspecialchars($vinyle['image_url']) ?>" class="card-img-top" alt="Vinyle">
+                    <img src="<?= ($vinyle['image_url']) ?>" class="card-img-top" alt="Vinyle">
                     <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($vinyle['titre']) ?></h5>
-                        <p class="card-text"><?= htmlspecialchars($vinyle['description']) ?></p>
-                        <p><strong><?= htmlspecialchars($vinyle['prix']) ?> &#x20AC</strong></p>
-                        <p><?= htmlspecialchars($vinyle['quantite']) ?> en stock</p>
+                        <h5 class="card-title"><?= ($vinyle['titre']) ?></h5>
+                        <p class="card-text"><?= ($vinyle['description']) ?></p>
+                        <p><strong><?= ($vinyle['prix']) ?> &#x20AC</strong></p>
+                        <p><?= ($vinyle['quantite']) ?> en stock</p>
                         <button class="btn btn-primary" onclick="ajouterAuPanier(<?= $vinyle['id'] ?>)">Ajouter au panier</button>
                     </div>
                 </div>
@@ -100,6 +100,7 @@ $commandes = $commandeDAO->getCommandesByUserId($id);
 <script src="../src/js/panier.js"></script>
 <script src="../src/js/filtrer_vinyles.js"></script>
 <script src="../src/js/passer_commande.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 </html>

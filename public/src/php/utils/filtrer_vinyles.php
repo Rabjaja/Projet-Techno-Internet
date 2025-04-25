@@ -14,15 +14,15 @@ if ($categorieId === '') {
 foreach ($vinyles as $vinyle): ?>
     <div class="col-md-4 mb-4 vinyle-card">
         <div class="card bg-secondary text-white h-100 d-flex flex-column">
-            <img src="<?= htmlspecialchars($vinyle['image_url']) ?>" class="card-img-top" alt="Vinyle">
+            <img src="<?= ($vinyle['image_url']) ?>" class="card-img-top" alt="Vinyle">
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>
-                    <h5 class="card-title"><?= htmlspecialchars($vinyle['titre']) ?></h5>
-                    <p class="card-text"><?= htmlspecialchars($vinyle['description']) ?></p>
+                    <h5 class="card-title"><?= ($vinyle['titre']) ?></h5>
+                    <p class="card-text"><?= ($vinyle['description']) ?></p>
                 </div>
                 <div>
-                    <p><strong><?= htmlspecialchars($vinyle['prix']) ?> &#x20AC</strong></p>
-                    <p><?= htmlspecialchars($vinyle['quantite']) ?> en stock</p>
+                    <p><strong><?= ($vinyle['prix']) ?> &#x20AC</strong></p>
+                    <p><?= ($vinyle['quantite']) ?> en stock</p>
                     <button class="btn btn-primary" onclick="ajouterAuPanier(<?= $vinyle['id'] ?>)">Ajouter au panier</button>
                 </div>
             </div>

@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php foreach ($categories as $categorie): ?>
                         <option value="<?php echo $categorie['id']; ?>"
                         <?php echo ($vinyle['categorie_id'] == $categorie['id']) ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($categorie['nom']); ?>
+                            <?php echo $categorie['nom']; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

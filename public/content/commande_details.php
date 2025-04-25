@@ -33,15 +33,15 @@ foreach ($commande['vinyles'] as $vinyle) {
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4>Détails de la commande #<?= htmlspecialchars($commande['id']) ?></h4>
+            <h4>Détails de la commande #<?= $commande['id'] ?></h4>
             <a href="../src/php/utils/commande_pdf.php?commande_id=<?= $commande['id'] ?>" class="btn btn-info" target="_blank">Télécharger PDF</a>
         </div>
     </div>
 
     <div class="card bg-secondary text-white">
         <div class="card-body">
-            <h5 class="card-title">Commande ID: <?= htmlspecialchars($commande['id']) ?></h5>
-            <p class="card-text">Date de la commande : <?= htmlspecialchars($commande['created_at']) ?></p>
+            <h5 class="card-title">Commande ID: <?= $commande['id'] ?></h5>
+            <p class="card-text">Date de la commande : <?= $commande['created_at'] ?></p>
 
             <h6>Vinyles commandés :</h6>
             <table class="table table-dark table-bordered mt-3">
@@ -56,9 +56,9 @@ foreach ($commande['vinyles'] as $vinyle) {
                 <tbody>
                 <?php foreach ($commande['vinyles'] as $vinyle): ?>
                     <tr>
-                        <td><?= htmlspecialchars($vinyle['titre']) ?></td>
+                        <td><?= $vinyle['titre'] ?></td>
                         <td><?= number_format($vinyle['prix'], 2, ',', ' ') ?></td>
-                        <td><?= htmlspecialchars($vinyle['quantite']) ?></td>
+                        <td><?= $vinyle['quantite'] ?></td>
                         <td><?= number_format($vinyle['prix'] * $vinyle['quantite'], 2, ',', ' ') ?></td>
                     </tr>
                 <?php endforeach; ?>

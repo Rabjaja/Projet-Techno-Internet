@@ -71,7 +71,7 @@ $vinyles = $vinyleDAO->getAllVinyles();
                     <option value="">Selectionner une categorie</option>
                     <?php foreach ($categories as $categorie): ?>
                         <option value="<?php echo $categorie['id']; ?>">
-                            <?php echo htmlspecialchars($categorie['nom']); ?>
+                            <?php echo $categorie['nom']; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -108,7 +108,7 @@ $vinyles = $vinyleDAO->getAllVinyles();
                                     break;
                                 }
                             }
-                            echo htmlspecialchars($categorie_nom);
+                            echo $categorie_nom;
                             ?>
                         </td>
                         <td>
