@@ -47,22 +47,72 @@ class VinyleDAO
         return $result ? $result['quantite'] : 0;
     }
 
-    public function addVinyle(string $titre, string $description, float $prix, int $quantite, string $image, int $categorie_id): bool
-    {
-        $stmt = $this->pdo->prepare("INSERT INTO vinyles (titre, description, prix, quantite, image_url, categorie_id) VALUES (?, ?, ?, ?, ?, ?)");
-        return $stmt->execute([$titre, $description, $prix, $quantite, $image, $categorie_id]);
+    public function addVinyle($titre, $description, $prix, $quantite, $image, $categorie_id)
+{
+    $query = "SELECT ajout_vinyle(:titre, :description, :prix, :quantite, :image, :categorie_id) AS retour";
+    try {
+        $this->pdo->beginTransaction();
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':description', $description);
+        $stmt->bindValue(':prix', $prix);
+        $stmt->bindValue(':quantite', $quantite);
+        $stmt->bindValue(':image', $image);
+        $stmt->bindValue(':categorie_id', $categorie_id);
+        $stmt->execute();
+        $retour = $stmt->fetchColumn(0);
+        $this->pdo->commit();
+        return $retour; // id du vinyle inséré ou -1
+    } catch (PDOException $e) {
+        $this->pdo->rollBack();
+        print $e->getMessage();
+        return -1;
     }
+}
 
-    public function updateVinyle(int $id, string $titre, string $description, float $prix, int $quantite, string $image, int $categorie_id): bool
-    {
-        $stmt = $this->pdo->prepare("UPDATE vinyles SET titre = ?, description = ?, prix = ?, quantite = ?, image_url = ?, categorie_id = ? WHERE id = ?");
-        return $stmt->execute([$titre, $description, $prix, $quantite, $image, $categorie_id, $id]);
-    }
 
-    public function deleteVinyle(int $id): bool
-    {
-        $stmt = $this->pdo->prepare("DELETE FROM vinyles WHERE id = ?");
-        return $stmt->execute([$id]);
+    public function updateVinyle($id, $titre, $description, $prix, $quantite, $image, $categorie_id)
+{
+    $query = "SELECT modifier_vinyle(:id, :titre, :description, :prix, :quantite, :image, :categorie_id) AS retour";
+    try {
+        $this->pdo->beginTransaction();
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':description', $description);
+        $stmt->bindValue(':prix', $prix);
+        $stmt->bindValue(':quantite', $quantite);
+        $stmt->bindValue(':image', $image);
+        $stmt->bindValue(':categorie_id', $categorie_id);
+        $stmt->execute();
+        $retour = $stmt->fetchColumn(0);
+        $this->pdo->commit();
+        return $retour; // id modifié ou -1
+    } catch (PDOException $e) {
+        $this->pdo->rollBack();
+        print $e->getMessage();
+        return -1;
     }
+}
+
+
+    public function deleteVinyle($id)
+{
+    $query = "SELECT supprimer_vinyle(:id) AS retour";
+    try {
+        $this->pdo->beginTransaction();
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $retour = $stmt->fetchColumn(0);
+        $this->pdo->commit();
+        return $retour; // id supprimé ou -1
+    } catch (PDOException $e) {
+        $this->pdo->rollBack();
+        print $e->getMessage();
+        return -1;
+    }
+}
+    
 
 }
